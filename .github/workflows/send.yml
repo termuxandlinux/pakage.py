@@ -1,0 +1,31 @@
+name: Create and Send ZIP to Discord
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install zip
+      run: sudo apt update && sudo apt install zip -y
+
+    - name: Create ZIP file
+      run: zip -r pakage.py-latest.zip .
+
+    - name: Send ZIP to Discord
+      uses: Ilshidur/action-discord@v2
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        content: |
+          **New package uploaded:**
+          [pakage.py](https://github.com/termuxandlinux/pakage.py)
+
+          Check out the latest release!
+        file: pakage.py-latest.zip

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Update package lists
+sudo apt update
+
+# Upgrade installed packages
+sudo apt upgrade -y
+
+# Install Python 3
+sudo apt install python3 -y
+
+# Start
+python3 $HOME/pakage.py/main.py

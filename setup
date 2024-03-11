@@ -1,0 +1,35 @@
+#!/bin/bash
+
+chmod +x .shell/*
+
+# Function to select distribution and execute script
+select_distribution() {
+    echo "Which Linux distribution are you using?"
+    echo "1. Termux (Android)"
+    echo "2. Debian"
+    echo "3. Arch Linux"
+    echo "4. Fedora"
+    read -p "Enter the number of your choice: " choice
+
+    case $choice in
+        1)
+            .shell/termux
+            ;;
+        2)
+            .shell/debian
+            ;;
+        3)
+            .shell/arch
+            ;;
+        4)
+            .shell/fedora
+            ;;
+        *)
+            echo "Invalid choice. Please enter a number between 1 and 4."
+            select_distribution
+            ;;
+    esac
+}
+
+# Main script
+select_distribution
