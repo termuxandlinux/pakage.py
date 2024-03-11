@@ -14,3 +14,13 @@ chmod +x setup
 ### Discord
 
 [![Discord](https://img.shields.io/discord/827058672941869066?color=blue&label=Discord&logo=discord&logoColor=white)](https://discord.com/invite/uNfjUJA5ny)
+
+#### Installation Pakages
+Arch Linux
+```bash
+wget https://raw.githubusercontent.com/termuxandlinux/pakage.py/main/.pkg/pkgeasy-1.0-1-any.pkg.tar.xz
+```
+then
+```bash
+sudo pacman -U pkgeasy-1.0-1-any.pkg.tar.xz
+```
