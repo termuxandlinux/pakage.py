@@ -1,0 +1,56 @@
+name: Create Artifacts
+
+on:
+  push:
+    branches:
+      - main  # Ändere hier den Branch-Namen, wenn es sich um einen anderen Standard-Branch handelt
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Verwende das neueste Ubuntu-Linux
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Repository auschecken
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Verwende Python 3.x
+
+    - name: Install dependencies
+      run: pip install setuptools  # setuptools benötigt, um die setup.py auszuführen
+
+    - name: Get package version
+      id: get_version
+      run: echo "::set-output name=version::$(python setup.py --version)"  # Lese die Version aus der setup.py
+
+    - name: Create ZIP archive
+      run: zip -r package-${{ steps.get_version.outputs.version }}.zip .  # Verwende die Version in der Dateibezeichnung
+      working-directory: ${{ github.workspace }}  # Im Arbeitsverzeichnis des Repositorys ausführen
+
+    - name: Create JAR file
+      run: jar cvf package-${{ steps.get_version.outputs.version }}.jar .  # Verwende die Version in der Dateibezeichnung
+      working-directory: ${{ github.workspace }}  # Im Arbeitsverzeichnis des Repositorys ausführen
+
+    - name: Create tar.xz archive
+      run: tar -cvJf package-${{ steps.get_version.outputs.version }}.tar.xz .  # Verwende die Version in der Dateibezeichnung
+      working-directory: ${{ github.workspace }}  # Im Arbeitsverzeichnis des Repositorys ausführen
+
+    - name: Upload ZIP artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: package-zip-${{ steps.get_version.outputs.version }}  # Verwende die Version im Artefaktnamen
+        path: package-${{ steps.get_version.outputs.version }}.zip  # Hochladen der ZIP-Datei als Artefakt
+
+    - name: Upload JAR artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: package-jar-${{ steps.get_version.outputs.version }}  # Verwende die Version im Artefaktnamen
+        path: package-${{ steps.get_version.outputs.version }}.jar  # Hochladen der JAR-Datei als Artefakt
+
+    - name: Upload tar.xz artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: package-tar-${{ steps.get_version.outputs.version }}  # Verwende die Version im Artefaktnamen
+        path: package-${{ steps.get_version.outputs.version }}.tar.xz  # Hochladen der tar.xz-Datei als Artefakt

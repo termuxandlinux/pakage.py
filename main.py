@@ -70,7 +70,10 @@ def main():
     package_name = input(blue + "{marker} Which package do you want to {action}: ".format(marker=marker, action=package_action))
 
     if package_action == 'install':
-        command = sudo + package_manager + ' ' + package_action + ' ' + package_name + ' -y'  # Add '-y' here
+        if package_manager == 'pacman':  # Check if package manager is pacman
+            command = sudo + package_manager + ' -Sy ' + package_name  # Update package list before install
+        else:
+            command = sudo + package_manager + ' ' + package_action + ' ' + package_name + ' -y'  # Normal install command
     elif package_action == 'search':
         command = sudo + package_manager + ' ' + package_action + ' ' + package_name
 
