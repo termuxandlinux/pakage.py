@@ -17,15 +17,15 @@ jobs:
       run: sudo apt update && sudo apt install zip -y
 
     - name: Create ZIP file
-      run: zip -r pakage.py-latest.zip .
+      run: zip -r package.py-latest.zip .
 
     - name: Send ZIP to Discord
-      uses: Ilshidur/action-discord@v2
+      uses: Ilshidur/action-discord@v1
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
         content: |
-          **New package uploaded:**
-          [pakage.py](https://github.com/termuxandlinux/pakage.py)
+          **Neues Paket hochgeladen:**
+          [package.py](https://github.com/termuxandlinux/package.py)
 
-          Check out the latest release!
-        file: pakage.py-latest.zip
+          Schau dir die neueste Version an!
+        file: package.py-latest.zip
