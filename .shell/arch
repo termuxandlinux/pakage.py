@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Update package lists
-sudo pacman -Syu --noconfirm
+pacman -Syu --noconfirm
 
 # Install Python 3
-sudo pacman -S python --noconfirm
+pacman -S python --noconfirm
 
 # Start
-sudo pyhton3 $HOME/pakage.py/main.py
+pyhton3 $HOME/pakage.py/main.py
