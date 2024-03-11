@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Update package lists
-sudo dnf update -y
+dnf update -y
 
 # Upgrade installed packages
-sudo dnf upgrade -y
+dnf upgrade -y
 
 # Install Python 3
-sudo dnf install python3 -y
+dnf install python3 -y
 
 # Start
-sudo python3 $HOME/pakage.py/main.py
+python3 $HOME/pakage.py/main.py
